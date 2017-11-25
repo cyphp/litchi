@@ -1,5 +1,7 @@
 <?php
 
+require(LYCHEE_SRC . 'autoload.php');
+
 use Silex\Application;
 use Silex\Provider\AssetServiceProvider;
 use Silex\Provider\TwigServiceProvider;
@@ -22,6 +24,7 @@ $app['twig'] = $app->extend('twig', function ($twig, $app) {
     return $twig;
 });
 
+$app->register(new Lychee\System\ServiceProvider());
 $app->register(new Lychee\Dock\ServiceProvider());
 $app->register(new Lychee\Auth\ServiceProvider());
 

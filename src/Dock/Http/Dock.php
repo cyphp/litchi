@@ -11,11 +11,8 @@ use Lychee\Modules\Response;
 use Lychee\Modules\Settings;
 use Lychee\Modules\Validator;
 
-use Lychee\Access\Installation;
 use Lychee\Access\Admin;
 use Lychee\Access\Guest;
-
-require(LYCHEE_SRC . 'autoload.php');
 
 class Dock
 {
@@ -32,19 +29,6 @@ class Dock
         if (isset($_POST['photoIDs'])&&Validator::isPhotoIDs($_POST['photoIDs'])===false) Response::error('Wrong parameter type for photoIDs!');
         if (isset($_POST['albumID'])&&Validator::isAlbumID($_POST['albumID'])==false)     Response::error('Wrong parameter type for albumID!');
         if (isset($_POST['photoID'])&&Validator::isPhotoID($_POST['photoID'])==false)     Response::error('Wrong parameter type for photoID!');
-
-        // Check if a configuration exists
-        if (Config::exists()===false) {
-            
-            /**
-            * Installation Access
-            * Limited access to configure Lychee. Only available when the config.php file is missing.
-            */
-            
-            Installation::init($fn);
-            exit();
-            
-        }
         
         // Check if user is logged
         if ($app['session']->get('login') &&

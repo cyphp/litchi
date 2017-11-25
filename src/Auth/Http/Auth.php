@@ -22,6 +22,7 @@ class Auth
             case 'Session::logout':
                 return $this->logout($request, $app);
             default:
+                $app['monolog']->debug('are really here');
                 Guest::init($fn);
                 exit();
         }
