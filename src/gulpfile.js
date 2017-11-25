@@ -47,7 +47,7 @@ gulp.task('view--js', function() {
 	           .pipe(plugins.concat('_view--javascript.js', {newLine: "\n"}))
 	           .pipe(babel)
 	           .on('error', catchError)
-	           .pipe(gulp.dest('../dist/'))
+	           .pipe(gulp.dest('../web/dist/'))
 
 })
 
@@ -57,7 +57,7 @@ gulp.task('view--scripts', ['view--js'], function() {
 	           .pipe(plugins.concat('view.js', {newLine: "\n"}))
 	           .pipe(plugins.uglify())
 	           .on('error', catchError)
-	           .pipe(gulp.dest('../dist/'))
+	           .pipe(gulp.dest('../web/dist/'))
 
 })
 
@@ -68,7 +68,7 @@ gulp.task('view--svg', function() {
 	           	starttag: '<!-- inject:svg -->',
 	           	transform: function(filePath, file) { return file.contents.toString('utf8') }
 	           }))
-	           .pipe(gulp.dest('../'))
+	           .pipe(gulp.dest('../web'))
 
  })
 
@@ -87,7 +87,7 @@ paths.main = {
 		'node_modules/mousetrap/plugins/global-bind/mousetrap-global-bind.min.js',
 		'node_modules/basiccontext/dist/basicContext.min.js',
 		'node_modules/basicmodal/dist/basicModal.min.js',
-		'../dist/_main--javascript.js'
+		'../web/dist/_main--javascript.js'
 	],
 	scss: [
 		'./styles/*.scss'
@@ -114,7 +114,7 @@ gulp.task('main--js', function() {
 	           .pipe(plugins.concat('_main--javascript.js', {newLine: "\n"}))
 	           .pipe(babel)
 	           .on('error', catchError)
-	           .pipe(gulp.dest('../dist/'))
+	           .pipe(gulp.dest('../web/dist/'))
 
 })
 
@@ -124,7 +124,7 @@ gulp.task('main--scripts', ['main--js'], function() {
 	           .pipe(plugins.concat('main.js', {newLine: "\n"}))
 	           .pipe(plugins.uglify())
 	           .on('error', catchError)
-	           .pipe(gulp.dest('../dist/'))
+	           .pipe(gulp.dest('../web/dist/'))
 
 })
 
@@ -136,7 +136,7 @@ gulp.task('main--styles', function() {
 	           .pipe(plugins.concat('main.css', {newLine: "\n"}))
 	           .pipe(plugins.autoprefixer('last 4 versions', '> 5%'))
 	           .pipe(plugins.minifyCss())
-	           .pipe(gulp.dest('../dist/'))
+	           .pipe(gulp.dest('../web/dist/'))
 
 })
 
@@ -147,7 +147,7 @@ gulp.task('main--svg', function() {
 	           	starttag: '<!-- inject:svg -->',
 	           	transform: function(filePath, file) { return file.contents.toString('utf8') }
 	           }))
-	           .pipe(gulp.dest('../'))
+	           .pipe(gulp.dest('../web'))
 
  })
 
@@ -155,7 +155,7 @@ gulp.task('main--svg', function() {
 
 gulp.task('clean', function() {
 
-	return gulp.src('../dist/_*.*', { read: false })
+	return gulp.src('../web/dist/_*.*', { read: false })
 	           .pipe(plugins.rimraf({ force: true }))
 	           .on('error', catchError)
 

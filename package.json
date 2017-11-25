@@ -1,0 +1,59 @@
+{
+  "name": "litchi",
+  "version": "4.0.0",
+  "description": "A great looking and easy-to-use photo-management-system you can run on your server, to manage and share photos.",
+  "main": "index.js",
+  "repository": "git@github.com:electerious/Lychee.git",
+  "author": "cyveros <cyveros@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "autoprefixer": "^7.1.3",
+    "babel": "^6.23.0",
+    "babel-core": "^6.26.0",
+    "babel-eslint": "^7.2.3",
+    "babel-loader": "^7.1.2",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-react-native": "^3.0.2",
+    "css-loader": "^0.28.7",
+    "eslint": "^4.6.0",
+    "eslint-config-airbnb": "^15.1.0",
+    "eslint-plugin-flowtype": "^2.35.1",
+    "eslint-plugin-flowtype-errors": "^3.3.1",
+    "eslint-plugin-import": "^2.7.0",
+    "eslint-plugin-jsx-a11y": "^5.1.1",
+    "eslint-plugin-react": "^7.3.0",
+    "extract-text-webpack-plugin": "^3.0.0",
+    "flow-bin": "^0.54.0",
+    "ghooks": "^2.0.0",
+    "html-webpack-plugin": "^2.30.1",
+    "node-sass": "^4.5.3",
+    "postcss-loader": "^2.0.6",
+    "precss": "^2.0.0",
+    "sass-loader": "^6.0.6",
+    "style-loader": "^0.18.2",
+    "webpack": "^3.5.5",
+    "webpack-dev-server": "^2.7.1"
+  },
+  "dependencies": {
+    "bootstrap": "4.0.0-alpha.6",
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1",
+    "react-icons": "^2.2.5",
+    "react-redux": "^5.0.6",
+    "react-router-dom": "^4.2.2",
+    "react-transition-group": "^2.2.0",
+    "reactstrap": "^4.8.0",
+    "redux": "^3.7.2"
+  },
+  "scripts": {
+    "start": "webpack-dev-server",
+    "lint": "eslint 'webapp/**/*.js'",
+    "fix-lint": "eslint --fix webapp/**/*.js"
+  },
+  "config": {
+    "ghooks": {
+      "pre-commit": "if [ -d 'ignite-base' ]; then cd ignite-base; fi; npm run lint"
+    }
+  }
+}

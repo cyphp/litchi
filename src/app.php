@@ -1,0 +1,28 @@
+<?php
+
+use Silex\Application;
+use Silex\Provider\AssetServiceProvider;
+use Silex\Provider\TwigServiceProvider;
+use Silex\Provider\ServiceControllerServiceProvider;
+use Silex\Provider\HttpFragmentServiceProvider;
+use Silex\Provider\MonologServiceProvider;
+use Silex\Provider\SessionServiceProvider;
+
+$app = new Application();
+
+$app->register(new ServiceControllerServiceProvider());
+$app->register(new AssetServiceProvider());
+$app->register(new TwigServiceProvider());
+$app->register(new HttpFragmentServiceProvider());
+$app->register(new Silex\Provider\SessionServiceProvider());
+
+$app['twig'] = $app->extend('twig', function ($twig, $app) {
+    // add custom globals, filters, tags, ...
+
+    return $twig;
+});
+
+$app->register(new Lychee\Dock\ServiceProvider());
+$app->register(new Lychee\Auth\ServiceProvider());
+
+return $app;

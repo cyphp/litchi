@@ -1,0 +1,154 @@
+{
+  "env": {
+    "node": true
+  },
+  "globals": {
+    "require": true,
+    "describe": true,
+    "context": true,
+    "it": true,
+    "before": true,
+    "after": true,
+    "beforeEach": true,
+    "afterEach": true,
+    "__DEV__": true
+  },
+  "rules": {
+    "quotes": [
+      "error",
+      "single",
+      {
+        "allowTemplateLiterals": true
+      }
+    ],
+    "valid-jsdoc": [2, {
+      "requireParamDescription": false,
+      "requireReturn": false
+    }],
+    "guard-for-in": 2,
+    "no-caller": 2,
+    "no-extend-native": 2,
+    "no-extra-bind": 2,
+    // "no-invalid-this": 2,  // This is not working with experimental ES7 class properties.
+    "no-new-wrappers": 2,
+    "no-throw-literal": 2,
+    "no-with": 2,
+    "no-unused-vars": [2, {"args": "none"}],
+    "array-bracket-spacing": [2, "never"],
+    "brace-style": 2,
+    "camelcase": 2,
+    "comma-spacing": 2,
+    "comma-style": 2,
+    "computed-property-spacing": 2,
+    "eol-last": 2,
+    "func-call-spacing": 2,
+    "key-spacing": 2,
+    "keyword-spacing": 0,
+    "linebreak-style": 2,
+    "max-len": [2, {
+      "code": 120,
+      "tabWidth": 2,
+      "ignoreUrls": true
+    }],
+    // "new-cap": 2,
+    "no-array-constructor": 2,
+    "no-mixed-spaces-and-tabs": 2,
+    "no-multiple-empty-lines": [2, {"max": 2}],
+    "no-new-object": 2,
+    "no-trailing-spaces": 2,
+    "object-curly-spacing": 2,
+    "one-var": [2, {
+      "var": "never",
+      "let": "never",
+      "const": "never"
+    }],
+    "padded-blocks": [2, "never"],
+    "quote-props": [2, "consistent"],
+    "semi-spacing": 2,
+    "semi": 2,
+    "spaced-comment": [2, "always"],
+    "arrow-parens": [2, "always"],
+    "no-this-before-super": 2,
+    "constructor-super": 2,
+    "no-new-symbol": 2,
+    "no-var": 2,
+    "prefer-rest-params": 2,
+    "prefer-spread": 2,
+    "rest-spread-spacing": 2,
+
+    "flowtype-errors/show-errors": 2,
+    "flowtype/boolean-style": [
+      2,
+      "boolean"
+    ],
+    "flowtype/define-flow-type": 1,
+    "flowtype/delimiter-dangle": [
+      2,
+      "never"
+    ],
+    "flowtype/generic-spacing": [
+      2,
+      "never"
+    ],
+    "flowtype/object-type-delimiter": [
+      2,
+      "comma"
+    ],
+    "flowtype/require-parameter-type": 2,
+    // "flowtype/require-return-type": [
+    //   2,
+    //   "always",
+    //   {
+    //     "annotateUndefined": "never"
+    //   }
+    // ],
+    "flowtype/require-valid-file-annotation": 2,
+    "flowtype/semi": [
+      2,
+      "always"
+    ],
+    "flowtype/space-after-type-colon": [
+      2,
+      "always"
+    ],
+    "flowtype/space-before-generic-bracket": [
+      2,
+      "never"
+    ],
+    "flowtype/space-before-type-colon": [
+      2,
+      "never"
+    ],
+    "flowtype/type-id-match": [
+      2,
+      "^([A-Z][a-z0-9]+)+Type$"
+    ],
+    "flowtype/union-intersection-spacing": [
+      2,
+      "always"
+    ],
+    "flowtype/use-flow-type": 1,
+    "flowtype/valid-syntax": 1,
+
+    "react/jsx-uses-vars": [2]
+  },
+  "settings": {
+    "flowtype": {
+      "onlyFilesWithFlowAnnotation": true
+    }
+  },
+  "plugins": [
+    "flowtype",
+    "flowtype-errors",
+    "react"
+  ],
+  "parserOptions": {
+    "ecmaVersion": 7,
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "extends": [
+    "plugin:flowtype/recommended"
+  ]
+}

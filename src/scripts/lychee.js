@@ -29,83 +29,63 @@ lychee = {
 }
 
 lychee.init = function() {
-
-	api.post('Session::init', {}, function(data) {
-
+	// api.auth('GET', {}, (data) => {
+	api.post('Session::init', {}, (data) => {
 		// Check status
 		// 0 = No configuration
 		// 1 = Logged out
 		// 2 = Logged in
 
 		if (data.status===2) {
-
 			// Logged in
 
-			lychee.sortingPhotos   = data.config.sortingPhotos   || ''
-			lychee.sortingAlbums   = data.config.sortingAlbums   || ''
-			lychee.dropboxKey      = data.config.dropboxKey      || ''
-			lychee.location        = data.config.location        || ''
-			lychee.checkForUpdates = data.config.checkForUpdates || '1'
+			lychee.sortingPhotos   = data.config.sortingPhotos   || '';
+			lychee.sortingAlbums   = data.config.sortingAlbums   || '';
+			lychee.dropboxKey      = data.config.dropboxKey      || '';
+			lychee.location        = data.config.location        || '';
+			lychee.checkForUpdates = data.config.checkForUpdates || '1';
 
 			// Show dialog when there is no username and password
-			if (data.config.login===false) settings.createLogin()
-
+			if (data.config.login===false) settings.createLogin();
 		} else if (data.status===1) {
-
 			// Logged out
 
-			lychee.checkForUpdates = data.config.checkForUpdates || '1'
+			lychee.checkForUpdates = data.config.checkForUpdates || '1';
 
-			lychee.setMode('public')
-
+			lychee.setMode('public');
 		} else if (data.status===0) {
-
 			// No configuration
 
-			lychee.setMode('public')
+			lychee.setMode('public');
 
-			header.dom().hide()
-			lychee.content.hide()
-			$('body').append(build.no_content('cog'))
-			settings.createConfig()
+			header.dom().hide();
+			lychee.content.hide();
+			$('body').append(build.no_content('cog'));
+			settings.createConfig();
 
-			return true
-
+			return true;
 		}
 
-		$(window).bind('popstate', lychee.load)
-		lychee.load()
+		$(window).bind('popstate', lychee.load);
+		lychee.load();
+	});
+};
 
-	})
-
-}
-
-lychee.login = function(data) {
-
-	let user     = data.username
-	let password = data.password
-
-	let params = {
+lychee.login = function({username: user, password}) {
+	// api.auth('POST', {
+	api.post('Session::login', {
 		user,
 		password
-	}
-
-	api.post('Session::login', params, function(data) {
-
+	}, function(data) {
 		if (data===true) {
-
-			window.location.reload()
+			// window.location.reload()
 
 		} else {
-
 			// Show error and reactive button
-			basicModal.error('password')
-
+			basicModal.error('password');
 		}
-
-	})
-
-}
+	});
+};
 
 lychee.loginDialog = function() {
 
@@ -129,19 +109,17 @@ lychee.loginDialog = function() {
 				fn: basicModal.close
 			}
 		}
-	})
+	});
 
-	if (lychee.checkForUpdates==='1') lychee.getUpdate()
-
-}
+	if (lychee.checkForUpdates==='1') lychee.getUpdate();
+};
 
 lychee.logout = function() {
-
+	// api.auth('DELETE', {}, function() {
 	api.post('Session::logout', {}, function() {
-		window.location.reload()
-	})
-
-}
+		window.location.reload();
+	});
+};
 
 lychee.goto = function(url = '') {
 

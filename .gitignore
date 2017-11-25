@@ -17,3 +17,13 @@ plugins/*
 
 !plugins/Diagnostics/
 !plugins/Log/
+/vendor/
+.vscode/
+node_modules/
+package-lock.json
+yarn.lock
+composer.lock
+var/
+
+web/dist/
+web/uploads/
