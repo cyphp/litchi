@@ -19,10 +19,6 @@ class Dock
     public function landing(Request $request, Application $app)
     {
         $fn = $request->request->get('function');
-            
-        // Start the session and set the default timezone
-
-        date_default_timezone_set('UTC');
         
         // Validate parameters
         if (isset($_POST['albumIDs'])&&Validator::isAlbumIDs($_POST['albumIDs'])===false) Response::error('Wrong parameter type for albumIDs!');
@@ -30,27 +26,13 @@ class Dock
         if (isset($_POST['albumID'])&&Validator::isAlbumID($_POST['albumID'])==false)     Response::error('Wrong parameter type for albumID!');
         if (isset($_POST['photoID'])&&Validator::isPhotoID($_POST['photoID'])==false)     Response::error('Wrong parameter type for photoID!');
         
-        // Check if user is logged
-        if ($app['session']->get('login') &&
-            $app['session']->get('identifier') === Settings::get()['identifier']
-        ) {
-            /**
-            * Admin Access
-            * Full access to Lychee. Only with correct password/session.
-            */
-            
-            Admin::init($fn);
-            exit();
-            
-        } else {
-            
-            /**
-            * Guest Access
-            * Access to view all public folders and photos in Lychee.
-            */
-            $subRequest = Request::create('/auth/', 'POST', $request->request->all());
 
-            return $app->handle($subRequest, HttpKernelInterface::SUB_REQUEST);            
-        }
+        /**
+        * Admin Access
+        * Full access to Lychee. Only with correct password/session.
+        */
+        
+        Admin::init($fn);
+        exit();
     }
 }

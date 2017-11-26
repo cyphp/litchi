@@ -21,7 +21,8 @@
         "symfony/translation": "~2.8|^3.0",
         "symfony/twig-bridge": "~2.8|^3.0",
         "symfony/validator": "~2.8|^3.0",
-        "monolog/monolog": "^1.23"
+        "monolog/monolog": "^1.23",
+        "symfony/var-dumper": "^3.3"
     },
     "autoload": {
         "psr-4": { "Lychee\\": "src/" },
@@ -50,5 +51,5 @@
             "email": "cyveros@gmail.com"
         }
     ],
-    "minimum-stability": "dev"
+    "minimum-stability": "stable"
 }

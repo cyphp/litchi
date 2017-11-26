@@ -16,7 +16,7 @@ final class Guest extends Access {
 		switch ($fn) {
 
 			// Albums functions
-			case 'Albums::get':       self::getAlbumsAction(); break;
+			// case 'Albums::get':       self::getAlbumsAction(); break;
 
 			// Album functions
 			case 'Album::get':        self::getAlbumAction(); break;
@@ -111,28 +111,28 @@ final class Guest extends Access {
 
 	// Session functions
 
-	public static function initAction() {
+	// public static function initAction() {
 
-		$session = new Session();
-		Response::json($session->init(true));
+	// 	$session = new Session();
+	// 	Response::json($session->init(true));
 
-	}
+	// }
 
-	public static function loginAction() {
+	// public static function loginAction() {
 
-		Validator::required(isset($_POST['user'], $_POST['password']), __METHOD__);
+	// 	Validator::required(isset($_POST['user'], $_POST['password']), __METHOD__);
 
-		$session = new Session();
-		Response::json($session->login($_POST['user'], $_POST['password']));
+	// 	$session = new Session();
+	// 	Response::json($session->login($_POST['user'], $_POST['password']));
 
-	}
+	// }
 
-	public static function logoutAction() {
+	// public static function logoutAction() {
 
-		$session = new Session();
-		Response::json($session->logout());
+	// 	$session = new Session();
+	// 	Response::json($session->logout());
 
-	}
+	// }
 
 	// $_GET functions
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Lychee\Auth;
+namespace Lychee\Album;
 
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
@@ -9,8 +9,6 @@ class ServiceProvider implements ServiceProviderInterface
 {
     public function register(Container $app)
     {
-        $app->mount('/auth', new ControllerProvider());
-
-        $app->before(new Middleware\Auth());
+        $app->mount('/albums', new ControllerProvider());
     }
 }

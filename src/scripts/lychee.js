@@ -29,8 +29,7 @@ lychee = {
 }
 
 lychee.init = function() {
-	// api.auth('GET', {}, (data) => {
-	api.post('Session::init', {}, (data) => {
+	api.auth('GET', {}, (data) => {
 		// Check status
 		// 0 = No configuration
 		// 1 = Logged out
@@ -72,14 +71,12 @@ lychee.init = function() {
 };
 
 lychee.login = function({username: user, password}) {
-	// api.auth('POST', {
-	api.post('Session::login', {
+	api.auth('POST', {
 		user,
 		password
 	}, function(data) {
 		if (data===true) {
-			// window.location.reload()
-
+			window.location.reload();
 		} else {
 			// Show error and reactive button
 			basicModal.error('password');
@@ -115,8 +112,7 @@ lychee.loginDialog = function() {
 };
 
 lychee.logout = function() {
-	// api.auth('DELETE', {}, function() {
-	api.post('Session::logout', {}, function() {
+	api.auth('DELETE', {}, function() {
 		window.location.reload();
 	});
 };

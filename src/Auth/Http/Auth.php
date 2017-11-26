@@ -10,56 +10,40 @@ use Lychee\Modules\Settings;
 
 class Auth
 {
-    public function authenticate(Request $request, Application $app)
-    {
-        $fn = $request->request->get('function');
-
-        switch ($fn) {
-            case 'Session::init':
-                return $this->status($request, $app);
-            case 'Session::login':
-                return $this->login($request, $app);
-            case 'Session::logout':
-                return $this->logout($request, $app);
-            default:
-                $app['monolog']->debug('are really here');
-                Guest::init($fn);
-                exit();
-        }
-    }
-
     public function status(Request $request, Application $app)
     {
-        $return['config'] = Settings::get();
-        
-        // Path to Lychee for the server-import dialog
-        $return['config']['location'] = LYCHEE;
+        $settings = Settings::get();
+        $authCredentialsCorrupted = (!Settings::get()['username'] && !Settings::get()['password']);
+        $return = [];
 
-        // Remove sensitive from response
-        unset($return['config']['username']);
-        unset($return['config']['password']);
-        unset($return['config']['identifier']);
+        unset(
+            $settings['username'],
+            $settings['password'],
+            $settings['identifier']
+        );
 
-        // Check if login credentials exist and login if they don't
-        if (!Settings::get()['username'] && !Settings::get()['password']) {
-            $public = false;
-            $return['config']['login'] = false;
+        if ($app['session']->get('login') && $app['session']->get('identifier') === Settings::get()['identifier']) {
             $return['status'] = LYCHEE_STATUS_LOGGEDIN;
-        } else {
-            $return['config']['login'] = true;
-            $return['status'] = LYCHEE_STATUS_LOGGEDOUT;
+            $return['config'] = $settings;
+            $return['config']['login'] = !$authCredentialsCorrupted;
 
-            // Unset unused vars
-            unset($return['config']['skipDuplicates']);
-            unset($return['config']['sortingAlbums']);
-            unset($return['config']['sortingPhotos']);
-            unset($return['config']['dropboxKey']);
-            unset($return['config']['login']);
-            unset($return['config']['location']);
-            unset($return['config']['imagick']);
-            unset($return['config']['plugins']);
+            return $app->json($return);
         }
-        
+
+        $return['status'] = LYCHEE_STATUS_LOGGEDOUT;
+
+        unset($settings['skipDuplicates']);
+        unset($settings['sortingAlbums']);
+        unset($settings['sortingPhotos']);
+        unset($settings['dropboxKey']);
+        unset($settings['login']);
+        unset($settings['location']);
+        unset($settings['imagick']);
+        unset($settings['plugins']);
+
+        $return['config'] = $settings;
+        $return['config']['login'] = !$authCredentialsCorrupted;
+
         return $app->json($return);
     }
 

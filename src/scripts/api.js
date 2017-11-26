@@ -44,27 +44,13 @@ api.post = function(fn, params, callback) {
 
 }
 
-api.auth = (method = 'POST', params, callback) => {
+api.fetch = (method = 'POST', uri, params, callback) => {
 	loadingBar.show();
-
-	let fn;
-
-	switch (method) {
-		case 'POST':
-			fn = 'Session::login';
-			break;
-		case 'GET':
-			fn = 'Session::init';
-			break;
-		case 'DELETE':
-			fn = 'Session::logout';
-			break;
-	}
 
 	$.ajax({
 		type: method, // method,
-		url: api.path + 'auth/',
-		data: {...params, fn},
+		url: api.path + uri,
+		data: params,
 		dataType: 'json'
 	}).done((data) => {
 		setTimeout(loadingBar.hide, 100);
@@ -79,4 +65,8 @@ api.auth = (method = 'POST', params, callback) => {
 	}).fail((jqXHR, textStatus, errorThrown) => {
 		api.onError('Server error or API not found.', params, errorThrown);
 	});
+};
+
+api.auth = (method = 'POST', params, callback) => {
+	api.fetch(method, 'auth/', params, callback);
 };

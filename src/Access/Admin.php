@@ -18,7 +18,7 @@ final class Admin extends Access {
 		switch ($fn) {
 
 			// Albums functions
-			case 'Albums::get':             self::getAlbumsAction(); break;
+			// case 'Albums::get':             self::getAlbumsAction(); break;
 
 			// Album functions
 			case 'Album::get':              self::getAlbumAction(); break;
@@ -49,9 +49,9 @@ final class Admin extends Access {
 			case 'search':                  self::searchAction(); break;
 
 			// Session functions
-			case 'Session::init':           self::initAction(); break;
-			case 'Session::login':          self::loginAction(); break;
-			case 'Session::logout':         self::logoutAction(); break;
+			// case 'Session::init':           self::initAction(); break;
+			// case 'Session::login':          self::loginAction(); break;
+			// case 'Session::logout':         self::logoutAction(); break;
 
 			// Settings functions
 			case 'Settings::setLogin':      self::setLoginAction(); break;
@@ -265,28 +265,28 @@ final class Admin extends Access {
 
 	// Session functions
 
-	private static function initAction() {
+	// private static function initAction() {
 
-		$session = new Session();
-		Response::json($session->init(false));
+	// 	$session = new Session();
+	// 	Response::json($session->init(false));
 
-	}
+	// }
 
-	private static function loginAction() {
+	// private static function loginAction() {
 
-		Validator::required(isset($_POST['user'], $_POST['password']), __METHOD__);
+	// 	Validator::required(isset($_POST['user'], $_POST['password']), __METHOD__);
 
-		$session = new Session();
-		Response::json($session->login($_POST['user'], $_POST['password']));
+	// 	$session = new Session();
+	// 	Response::json($session->login($_POST['user'], $_POST['password']));
 
-	}
+	// }
 
-	private static function logoutAction() {
+	// private static function logoutAction() {
 
-		$session = new Session();
-		Response::json($session->logout());
+	// 	$session = new Session();
+	// 	Response::json($session->logout());
 
-	}
+	// }
 
 	// Settings functions
 

@@ -16,7 +16,8 @@ albums.load = function() {
 
 	if (albums.json===null) {
 
-		api.post('Albums::get', {}, function(data) {
+		api.fetch('GET', 'albums/', {}, function(data) {
+		// api.post('Albums::get', {}, function(data) {
 
 			let waitTime = 0
 

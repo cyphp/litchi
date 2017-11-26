@@ -89,7 +89,7 @@ contextMenu.albumMulti = function(albumIDs, e) {
 
 contextMenu.albumTitle = function(albumID, e) {
 
-	api.post('Albums::get', {}, function(data) {
+	api.fetch('GET', 'albums/', {}, function(data) {
 
 		let items = []
 
@@ -124,7 +124,7 @@ contextMenu.albumTitle = function(albumID, e) {
 
 contextMenu.mergeAlbum = function(albumID, e) {
 
-	api.post('Albums::get', {}, function(data) {
+	api.fetch('GET', 'albums/', {}, function(data) {
 
 		let items = []
 
@@ -250,7 +250,7 @@ contextMenu.move = function(photoIDs, e) {
 
 	let items = []
 
-	api.post('Albums::get', {}, function(data) {
+	api.fetch('GET', 'albums/', {}, function(data) {
 
 		if (data.num===0) {
 

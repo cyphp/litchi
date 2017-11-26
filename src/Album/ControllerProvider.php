@@ -1,6 +1,6 @@
 <?php
 
-namespace Lychee\Auth;
+namespace Lychee\Album;
 
 use Silex\Application;
 use Silex\Api\ControllerProviderInterface;
@@ -12,9 +12,9 @@ class ControllerProvider implements ControllerProviderInterface
         // creates a new controller based on the default route
         $controllers = $app['controllers_factory'];
 
-        $controllers->get('/', Http\Auth::class . '::status');
-        $controllers->post('/', Http\Auth::class . '::login');
-        $controllers->delete('/', Http\Auth::class . '::logout');
+        $controllers->get('/', Http\Album::class . '::all');
+        // $controllers->post('/', Http\Auth::class . '::login');
+        // $controllers->delete('/', Http\Auth::class . '::logout');
 
         return $controllers;
     }
