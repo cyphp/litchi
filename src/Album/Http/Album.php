@@ -32,7 +32,7 @@ class Album
         return $app->json($preflight ? false : 'Warning: Wrong password!');
     }
 
-    public function albumArchive(Request $request, Application $app, $id)
+    public function archive(Request $request, Application $app, $id)
     {
         $album = new LycheeAlbum($id);
 
@@ -51,42 +51,5 @@ class Album
         }
 
         return $app->json('Warning: Wrong password!');
-    }
-
-    public function photo(Request $request, Application $app, $albumId, $photoId)
-    {
-        $photo = new Photo($photoId);
-        
-        if ($app['guard']->isAuthenticated()) {
-            return $app->json($photo->get($albumId));
-        }
-        
-        $pgP = $photo->getPublic($request->request->get('password'));
-
-        if ($pgP===2) {
-            return $app->json($photo->get($albumId));
-        }
-        
-        if ($pgP===1) {
-            return $app->json('Warning: Wrong password!');
-        }
-        
-        return $app->json('Warning: Photo private!');
-    }
-
-    public function photoArchive(Request $request, Application $app, $photoId)
-    {
-        $photo = new Photo($photoId);
-
-        if ($app['guard']->isAuthenticated()) {
-            return $photo->getArchive();
-        }
-
-        if (2 === $photo->getPublic($request->query->get('password'))) {
-            return $photo->getArchive();
-        }
-        
-        // Photo private
-        return $app->json('Warning: Album private or not downloadable!');
     }
 }

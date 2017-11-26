@@ -32,6 +32,7 @@ $app->register(new Lychee\Dock\ServiceProvider());
 $app->register(new Lychee\Auth\ServiceProvider());
 $app->register(new Lychee\Albums\ServiceProvider());
 $app->register(new Lychee\Album\ServiceProvider());
+$app->register(new Lychee\Photo\ServiceProvider());
 $app->register(new Lychee\Search\ServiceProvider());
 
 return $app;

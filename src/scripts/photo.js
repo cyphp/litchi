@@ -39,10 +39,11 @@ photo.load = function(photoID, albumID) {
 	}
 
 	let params = {
+		albumID,
 		password: password.value
 	}
 
-	api.fetch('GET', 'album/' + albumID + '/photo/' + photoID, params, function(data) {
+	api.fetch('GET', 'photo/' + photoID, params, function(data) {
 	// api.post('Photo::get', params, function(data) {
 
 		if (data==='Warning: Photo private!') {
@@ -634,7 +635,7 @@ photo.share = function(photoID, service) {
 
 photo.getArchive = function(photoID) {
 
-	let link = `${ api.path }album/photo/${ photoID }`;
+	let link = `${ api.path }photo/${ photoID }/archive`;
 
 	if (lychee.publicMode===true) {
 		link += `?password=${ encodeURIComponent(password.value) }`;

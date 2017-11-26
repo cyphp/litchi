@@ -1,6 +1,6 @@
 <?php
 
-namespace Lychee\Album;
+namespace Lychee\Photo;
 
 use Silex\Application;
 use Silex\Api\ControllerProviderInterface;
@@ -12,8 +12,8 @@ class ControllerProvider implements ControllerProviderInterface
         // creates a new controller based on the default route
         $controllers = $app['controllers_factory'];
 
-        $controllers->get('/{id}', Http\Album::class . '::album');
-        $controllers->get('/{id}/archive', Http\Album::class . '::archive');
+        $controllers->get('/{id}', Http\Photo::class . '::photo');
+        $controllers->get('/{id}/archive', Http\Photo::class . '::archive');
 
         return $controllers;
     }
