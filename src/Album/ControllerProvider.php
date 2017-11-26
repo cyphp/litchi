@@ -13,6 +13,7 @@ class ControllerProvider implements ControllerProviderInterface
         $controllers = $app['controllers_factory'];
 
         $controllers->get('/{id}', Http\Album::class . '::one');
+        $controllers->get('/{albumId}/photo/{photoId}', Http\Album::class . '::photo');
 
         return $controllers;
     }

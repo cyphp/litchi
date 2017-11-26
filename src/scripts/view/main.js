@@ -149,7 +149,8 @@ const loadPhotoInfo = function(photoID) {
 		password : ''
 	}
 
-	api.post('Photo::get', params, function(data) {
+	api.fetch('GET', 'album/' + albumID + '/photo/' + photoID, params, function(data) {
+	// api.post('Photo::get', params, function(data) {
 
 		if (data==='Warning: Photo private!' || data==='Warning: Wrong password!') {
 
