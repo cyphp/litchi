@@ -10,25 +10,26 @@ use Lychee\Modules\Photo;
 
 class Album
 {
-    public function one(Request $request, Application $app, $id)
+    public function album(Request $request, Application $app, $id)
     {
         $album = new LycheeAlbum($id);
+        $preflight = $request->query->get('preflight');
 
         if ($app['guard']->isAuthenticated()) {
             return $app->json($album->get());
         }
 
-        if ($album->getPublic()===true) {
-            // Album public
-            if ($album->checkPassword($request->request->get('password')===true)) {
-                return $app->json($album->get());
-            } else {
-                return $app->json('Warning: Wrong password!');
-            }
-        } else {
+        if (!$album->getPublic()) {
             // Album private
-            return $app->json('Warning: Album private!');
+            return $app->json($preflight ? false : 'Warning: Album private!');
         }
+        
+        // Album public
+        if ($album->checkPassword($request->query->get('password'))===true) {
+            return $app->json($preflight ? true : $album->get());
+        }
+
+        return $app->json($preflight ? false : 'Warning: Wrong password!');
     }
 
     public function photo(Request $request, Application $app, $albumId, $photoId)

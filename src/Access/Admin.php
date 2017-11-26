@@ -30,7 +30,7 @@ final class Admin extends Access {
 			case 'Album::merge':            self::mergeAlbumsAction(); break;
 
 			// Photo functions
-			case 'Photo::get':              self::getPhotoAction(); break;
+			// case 'Photo::get':              self::getPhotoAction(); break;
 			case 'Photo::setTitle':         self::setPhotoTitleAction(); break;
 			case 'Photo::setDescription':   self::setPhotoDescriptionAction(); break;
 			case 'Photo::setStar':          self::setPhotoStarAction(); break;

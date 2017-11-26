@@ -42,7 +42,6 @@ album.load = function(albumID, refresh = false) {
 		};
 
 		api.fetch('GET', 'album/' + albumID, params, function(data) {
-		// api.post('Album::get', params, function(data) {
 
 			let waitTime = 0
 

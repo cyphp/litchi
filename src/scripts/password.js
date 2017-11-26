@@ -34,14 +34,14 @@ password.getDialog = function(albumID, callback) {
 
 	const action = (data) => {
 
-		let passwd = data.password
+		let passwd = data.password;
 
 		let params = {
-			albumID,
+			preflight: true,
 			password: passwd
-		}
+		};
 
-		api.post('Album::getPublic', params, function(data) {
+		api.fetch('GET', 'album/' + albumID, params, function(data) {
 
 			if (data===true) {
 				basicModal.close()

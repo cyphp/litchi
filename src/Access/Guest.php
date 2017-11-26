@@ -20,10 +20,10 @@ final class Guest extends Access {
 
 			// Album functions
 			// case 'Album::get':        self::getAlbumAction(); break;
-			case 'Album::getPublic':  self::checkAlbumAccessAction(); break;
+			// case 'Album::getPublic':  self::checkAlbumAccessAction(); break;
 
 			// Photo functions
-			case 'Photo::get':        self::getPhotoAction(); break;
+			// case 'Photo::get':        self::getPhotoAction(); break;
 
 			// Session functions
 			// case 'Session::init':     self::initAction(); break;
