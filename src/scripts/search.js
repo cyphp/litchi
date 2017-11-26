@@ -16,7 +16,7 @@ search.find = function(term) {
 
 		if (header.dom('.header__search').val().length!==0) {
 
-			api.post('search', { term }, function(data) {
+			api.fetch('GET', 'search/', { term }, function(data) {
 
 				let html       = ''
 				let albumsData = ''

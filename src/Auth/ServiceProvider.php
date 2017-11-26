@@ -15,6 +15,6 @@ class ServiceProvider implements ServiceProviderInterface
 
         $app->mount('/auth', new ControllerProvider());
 
-        $app->before(new Middleware\Auth());
+        // $app->before(new Middleware\Auth());
     }
 }

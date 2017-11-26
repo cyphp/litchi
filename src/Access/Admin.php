@@ -46,7 +46,7 @@ final class Admin extends Access {
 			case 'Import::server':          self::importServerAction(); break;
 
 			// Search functions
-			case 'search':                  self::searchAction(); break;
+			// case 'search':                  self::searchAction(); break;
 
 			// Session functions
 			// case 'Session::init':           self::initAction(); break;
