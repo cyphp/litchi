@@ -5,6 +5,8 @@ namespace Lychee\Album;
 use Silex\Application;
 use Silex\Api\ControllerProviderInterface;
 
+use Lychee\Auth;
+
 class ControllerProvider implements ControllerProviderInterface
 {
     public function connect(Application $app)
@@ -15,7 +17,9 @@ class ControllerProvider implements ControllerProviderInterface
         $controllers->get('/{id}', Http\Album::class . '::album');
         $controllers->get('/{id}/archive', Http\Album::class . '::archive');
 
-        $controllers->post('/', Http\Album::class . '::create');
+        $controllers
+            ->post('/', Http\Album::class . '::create')
+            ->before(new Auth\Middleware\Auth());
 
         return $controllers;
     }
