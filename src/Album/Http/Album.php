@@ -52,4 +52,11 @@ class Album
 
         return $app->json('Warning: Wrong password!');
     }
+
+    public function create(Request $request, Application $app)
+    {
+        $album = new LycheeAlbum(null);
+
+		return $app->json($album->add($request->request->get('title')));
+    }
 }

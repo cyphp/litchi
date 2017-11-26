@@ -22,7 +22,7 @@ final class Admin extends Access {
 
 			// Album functions
 			// case 'Album::get':              self::getAlbumAction(); break;
-			case 'Album::add':              self::addAlbumAction(); break;
+			// case 'Album::add':              self::addAlbumAction(); break;
 			case 'Album::setTitle':         self::setAlbumTitleAction(); break;
 			case 'Album::setDescription':   self::setAlbumDescriptionAction(); break;
 			case 'Album::setPublic':        self::setAlbumPublicAction(); break;

@@ -112,7 +112,7 @@ album.add = function() {
 			title
 		}
 
-		api.post('Album::add', params, function(data) {
+		api.fetch('POST', 'album/', params, function(data) {
 
 			if (data!==false && isNumber(data)) {
 				albums.refresh()

@@ -15,6 +15,8 @@ class ControllerProvider implements ControllerProviderInterface
         $controllers->get('/{id}', Http\Album::class . '::album');
         $controllers->get('/{id}/archive', Http\Album::class . '::archive');
 
+        $controllers->post('/', Http\Album::class . '::create');
+
         return $controllers;
     }
 }
