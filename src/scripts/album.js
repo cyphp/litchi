@@ -33,16 +33,16 @@ album.load = function(albumID, refresh = false) {
 
 	password.get(albumID, function() {
 
-		if (refresh===false) lychee.animate('.content', 'contentZoomOut')
+		if (refresh===false) lychee.animate('.content', 'contentZoomOut');
 
-		let startTime = new Date().getTime()
+		let startTime = new Date().getTime();
 
 		let params = {
-			albumID,
 			password: password.value
-		}
+		};
 
-		api.post('Album::get', params, function(data) {
+		api.fetch('GET', 'album/' + albumID, params, function(data) {
+		// api.post('Album::get', params, function(data) {
 
 			let waitTime = 0
 

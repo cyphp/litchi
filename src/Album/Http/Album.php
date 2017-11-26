@@ -5,21 +5,28 @@ namespace Lychee\Album\Http;
 use Silex\Application;
 use Symfony\Component\HttpFoundation\Request;
 
-use Lychee\Modules\Albums;
-use Lychee\Modules\Settings;
+use Lychee\Modules\Album as LycheeAlbum;
 
 class Album
 {
-    public function all(Request $request, Application $app)
+    public function one(Request $request, Application $app, $id)
     {
-        $albums = new Albums();
+        $album = new LycheeAlbum($id);
 
-        if ($app['session']->get('login') &&
-            $app['session']->get('identifier') === Settings::get()['identifier']
-        ) {
-            return $app->json($albums->get(false));
+        if ($app['guard']->isAuthenticated()) {
+            return $app->json($album->get());
         }
 
-        return $app->json($albums->get(true));
+        if ($album->getPublic()===true) {
+            // Album public
+            if ($album->checkPassword($request->request->get('password')===true)) {
+                return $app->json($album->get());
+            } else {
+                return $app->json('Warning: Wrong password!');
+            }
+        } else {
+            // Album private
+            return $app->json('Warning: Album private!');
+        }
     }
 }

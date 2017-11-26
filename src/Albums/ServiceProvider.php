@@ -1,6 +1,6 @@
 <?php
 
-namespace Lychee\Album;
+namespace Lychee\Albums;
 
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
@@ -9,6 +9,6 @@ class ServiceProvider implements ServiceProviderInterface
 {
     public function register(Container $app)
     {
-        $app->mount('/album', new ControllerProvider());
+        $app->mount('/albums', new ControllerProvider());
     }
 }

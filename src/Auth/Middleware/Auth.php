@@ -16,9 +16,7 @@ class Auth
         if ($request->isMethod('POST') && '/' === $request->getPathInfo()) {
             $fn = $request->request->get('function');
 
-            if (!$app['session']->get('login') ||
-                $app['session']->get('identifier') !== Settings::get()['identifier']
-            ) {
+            if (!$app['guard']->isAuthenticated()) {
                 return Guest::init($fn);
             }
         }

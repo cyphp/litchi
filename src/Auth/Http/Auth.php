@@ -22,7 +22,7 @@ class Auth
             $settings['identifier']
         );
 
-        if ($app['session']->get('login') && $app['session']->get('identifier') === Settings::get()['identifier']) {
+        if ($app['guard']->isAuthenticated()) {
             $return['status'] = LYCHEE_STATUS_LOGGEDIN;
             $return['config'] = $settings;
             $return['config']['login'] = !$authCredentialsCorrupted;

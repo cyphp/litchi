@@ -30,6 +30,7 @@ $app['twig'] = $app->extend('twig', function ($twig, $app) {
 $app->register(new Lychee\System\ServiceProvider());
 $app->register(new Lychee\Dock\ServiceProvider());
 $app->register(new Lychee\Auth\ServiceProvider());
+$app->register(new Lychee\Albums\ServiceProvider());
 $app->register(new Lychee\Album\ServiceProvider());
 
 return $app;
