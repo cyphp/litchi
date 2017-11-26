@@ -634,16 +634,13 @@ photo.share = function(photoID, service) {
 
 photo.getArchive = function(photoID) {
 
-	let link
-	let url = `${ api.path }?function=Photo::getArchive&photoID=${ photoID }`
+	let link = `${ api.path }album/photo/${ photoID }`;
 
-	if (location.href.indexOf('index.html')>0) link = location.href.replace(location.hash, '').replace('index.html', url)
-	else                                       link = location.href.replace(location.hash, '') + url
+	if (lychee.publicMode===true) {
+		link += `?password=${ encodeURIComponent(password.value) }`;
+	}
 
-	if (lychee.publicMode===true) link += `&password=${ encodeURIComponent(password.value) }`
-
-	location.href = link
-
+	location.href = link;
 }
 
 photo.getDirectLink = function() {

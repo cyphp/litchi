@@ -59,8 +59,8 @@ final class Admin extends Access {
 			case 'Settings::setDropboxKey': self::setDropboxKeyAction(); break;
 
 			// $_GET functions
-			case 'Album::getArchive':       self::getAlbumArchiveAction(); break;
-			case 'Photo::getArchive':       self::getPhotoArchiveAction(); break;
+			// case 'Album::getArchive':       self::getAlbumArchiveAction(); break;
+			// case 'Photo::getArchive':       self::getPhotoArchiveAction(); break;
 
 		}
 

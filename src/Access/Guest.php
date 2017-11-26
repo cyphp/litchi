@@ -31,8 +31,8 @@ final class Guest extends Access {
 			// case 'Session::logout':   self::logoutAction(); break;
 
 			// $_GET functions
-			case 'Album::getArchive': self::getAlbumArchiveAction(); break;
-			case 'Photo::getArchive': self::getPhotoArchiveAction(); break;
+			// case 'Album::getArchive': self::getAlbumArchiveAction(); break;
+			// case 'Photo::getArchive': self::getPhotoArchiveAction(); break;
 
 		}
 
