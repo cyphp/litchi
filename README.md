@@ -1,4 +1,12 @@
-# Lychee
+# Litchi on Lychee
+
+> This is an effort to modernize Lychee Project
+
+### Goals
+
+1. port Lychee backend with modern micro-framework silex, LTE to GraphQL implementation
+2. port Lychee frontend with super fast React
+3. provide genral purpose api to allow mobile app integration
 
 #### A great looking and easy-to-use photo-management-system.
 
