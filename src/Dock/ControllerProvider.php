@@ -16,10 +16,6 @@ class ControllerProvider implements ControllerProviderInterface
             return $app['twig']->render('litchi.html.twig', array());
         })->bind('homepage');
 
-        $controllers->post('/', Http\Dock::class . '::landing')->before(
-            new Middleware\RequestIntegrity()
-        );
-
         return $controllers;
     }
 }

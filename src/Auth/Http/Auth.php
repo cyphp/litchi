@@ -5,7 +5,6 @@ namespace Lychee\Auth\Http;
 use Silex\Application;
 use Symfony\Component\HttpFoundation\Request;
 
-use Lychee\Access\Guest;
 use Lychee\Modules\Settings;
 
 class Auth
@@ -70,5 +69,19 @@ class Auth
         $app['session']->clear();
 
 		return $app->json(true);
+    }
+
+    public function change(Request $request, Application $app)
+    {
+        $oldPassword = $request->request->get('oldPassword') ?: '';
+
+        return $app->json(
+            Settings::setLogin(
+                $oldPassword,
+                $request->request->get('username'),
+                $request->request->get('password')
+            )
+        );
+
     }
 }

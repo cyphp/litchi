@@ -6,8 +6,6 @@ use Pimple\Container;
 use Pimple\ServiceProviderInterface;
 use Silex\Application;
 
-use Lychee\Access\Installation;
-
 class ServiceProvider implements ServiceProviderInterface
 {
     public function register(Container $app)

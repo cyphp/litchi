@@ -15,6 +15,7 @@ class ControllerProvider implements ControllerProviderInterface
         $controllers->get('/', Http\Auth::class . '::status');
         $controllers->post('/', Http\Auth::class . '::login');
         $controllers->delete('/', Http\Auth::class . '::logout');
+        $controllers->patch('/', Http\Auth::class . '::change');
 
         return $controllers;
     }

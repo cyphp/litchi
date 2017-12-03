@@ -159,7 +159,7 @@ settings.createLogin = function() {
 			password
 		}
 
-		api.post('Settings::setLogin', params, function(data) {
+		api.fetch('PATCH', 'auth/', params, function(data) {
 
 			if (data!==true) {
 
@@ -230,7 +230,7 @@ settings.setLogin = function() {
 			password
 		}
 
-		api.post('Settings::setLogin', params, function(data) {
+		api.fetch('PATCH', 'auth/', params, function(data) {
 
 			if (data!==true) lychee.error(null, params, data)
 

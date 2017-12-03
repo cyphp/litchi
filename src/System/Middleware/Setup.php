@@ -17,7 +17,7 @@ class Setup
 
         if (!$app['system.config']->exists()) {    
             /**
-            * Installation Access
+            * Installation
             * Limited access to configure Lychee. Only available when the config.php file is missing.
             */
             $subRequest = Request::create(
