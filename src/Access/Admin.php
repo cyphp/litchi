@@ -55,8 +55,8 @@ final class Admin extends Access {
 
 			// Settings functions
 			case 'Settings::setLogin':      self::setLoginAction(); break;
-			case 'Settings::setSorting':    self::setSortingAction(); break;
-			case 'Settings::setDropboxKey': self::setDropboxKeyAction(); break;
+			// case 'Settings::setSorting':    self::setSortingAction(); break;
+			// case 'Settings::setDropboxKey': self::setDropboxKeyAction(); break;
 
 			// $_GET functions
 			// case 'Album::getArchive':       self::getAlbumArchiveAction(); break;

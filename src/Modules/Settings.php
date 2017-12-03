@@ -124,10 +124,10 @@ final class Settings {
 	 */
 	public static function setDropboxKey($dropboxKey) {
 
-		if (strlen($dropboxKey)<1||strlen($dropboxKey)>50) {
-			Log::notice(Database::get(), __METHOD__, __LINE__, 'Dropbox key is either too short or too long');
-			return false;
-		}
+		// if (strlen($dropboxKey)<1||strlen($dropboxKey)>50) {
+		// 	Log::notice(Database::get(), __METHOD__, __LINE__, 'Dropbox key is either too short or too long');
+		// 	return false;
+		// }
 
 		if (self::set('dropboxKey', $dropboxKey)===false) return false;
 		return true;

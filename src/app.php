@@ -34,5 +34,6 @@ $app->register(new Lychee\Albums\ServiceProvider());
 $app->register(new Lychee\Album\ServiceProvider());
 $app->register(new Lychee\Photo\ServiceProvider());
 $app->register(new Lychee\Search\ServiceProvider());
+$app->register(new Lychee\Settings\ServiceProvider());
 
 return $app;

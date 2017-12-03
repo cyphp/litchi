@@ -289,7 +289,7 @@ settings.setSorting = function() {
 			orderPhotos : sortingPhotos[1]
 		}
 
-		api.post('Settings::setSorting', params, function(data) {
+		api.fetch('POST', 'settings/sorting', params, function(data) {
 
 			if (data===true) {
 				lychee.sortingAlbums = 'ORDER BY ' + sortingAlbums[0] + ' ' + sortingAlbums[1]
@@ -392,7 +392,7 @@ settings.setDropboxKey = function(callback) {
 
 		basicModal.close()
 
-		api.post('Settings::setDropboxKey', { key }, function(data) {
+		api.fetch('POST', 'settings/integration', { dropboxKey: key }, function(data) {
 
 			if (data===true) {
 				lychee.dropboxKey = key
