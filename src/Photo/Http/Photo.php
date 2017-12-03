@@ -46,4 +46,58 @@ class Photo
         // Photo private
         return $app->json('Warning: Album private or not downloadable!');
     }
+
+    public function create(Request $request, Application $app)
+    {
+        $photo = new LycheePhoto(null);
+
+		return $app->json($photo->add($_FILES, $request->request->get('albumID')));
+    }
+
+    public function remove(Request $request, Application $app, $id)
+    {
+        $photo = new LycheePhoto($id);
+
+		return $app->json($photo->delete());
+    }
+
+    public function duplicate(Request $request, Application $app, $id)
+    {
+        $photo = new LycheePhoto($id);
+
+		return $app->json($photo->duplicate());
+    }
+
+    public function change(Request $request, Application $app, $id)
+    {
+        $photo = new LycheePhoto($id);
+        
+        $changed = true;
+
+        if ($request->request->has('title')) {
+            $changed = $changed && $photo->setTitle($request->request->get('title'));
+        }
+
+        if ($request->request->has('description')) {
+            $changed = $changed && $photo->setDescription($request->request->get('description'));
+        }
+
+        if ($request->request->get('star')) {
+            $changed = $changed && $photo->setStar();
+        }
+
+        if ($request->request->get('public')) {
+            $changed = $changed && $photo->setPublic();
+        }
+
+        if ($request->request->has('tags')) {
+            $changed = $changed && $photo->setTags($request->request->get('tags'));
+        }
+
+        if ($request->request->has('albumID')) {
+            $changed = $changed && $photo->setAlbum($request->request->get('albumID'));
+        }
+
+        return $app->json($changed);
+    }
 }

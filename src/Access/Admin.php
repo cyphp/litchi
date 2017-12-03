@@ -31,17 +31,17 @@ final class Admin extends Access {
 
 			// Photo functions
 			// case 'Photo::get':              self::getPhotoAction(); break;
-			case 'Photo::setTitle':         self::setPhotoTitleAction(); break;
-			case 'Photo::setDescription':   self::setPhotoDescriptionAction(); break;
-			case 'Photo::setStar':          self::setPhotoStarAction(); break;
-			case 'Photo::setPublic':        self::setPhotoPublicAction(); break;
-			case 'Photo::setAlbum':         self::setPhotoAlbumAction(); break;
-			case 'Photo::setTags':          self::setPhotoTagsAction(); break;
-			case 'Photo::duplicate':        self::duplicatePhotoAction(); break;
-			case 'Photo::delete':           self::deletePhotoAction(); break;
+			// case 'Photo::setTitle':         self::setPhotoTitleAction(); break;
+			// case 'Photo::setDescription':   self::setPhotoDescriptionAction(); break;
+			// case 'Photo::setStar':          self::setPhotoStarAction(); break;
+			// case 'Photo::setPublic':        self::setPhotoPublicAction(); break;
+			// case 'Photo::setAlbum':         self::setPhotoAlbumAction(); break;
+			// case 'Photo::setTags':          self::setPhotoTagsAction(); break;
+			// case 'Photo::duplicate':        self::duplicatePhotoAction(); break;
+			// case 'Photo::delete':           self::deletePhotoAction(); break;
 
 			// Add functions
-			case 'Photo::add':              self::uploadAction(); break;
+			// case 'Photo::add':              self::uploadAction(); break;
 			case 'Import::url':             self::importUrlAction(); break;
 			case 'Import::server':          self::importServerAction(); break;
 

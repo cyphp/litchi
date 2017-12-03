@@ -88,7 +88,7 @@ upload.start = {
 			formData.append('albumID', albumID)
 			formData.append(0, file)
 
-			xhr.open('POST', api.path)
+			xhr.open('POST', api.path + 'photo/')
 
 			xhr.onload = function() {
 

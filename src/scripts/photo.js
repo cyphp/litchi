@@ -171,12 +171,12 @@ photo.duplicate = function(photoIDs) {
 		photoIDs: photoIDs.join()
 	}
 
-	api.post('Photo::duplicate', params, function(data) {
+	api.fetch('POST', 'photo/' + photoIDs.join() + '/duplicate', {}, function(data) {
 
 		if (data!==true) lychee.error(null, params, data)
 		else             album.load(album.getID())
 
-	})
+	});
 
 }
 
@@ -236,10 +236,11 @@ photo.delete = function(photoIDs) {
 		let params = {
 			photoIDs: photoIDs.join()
 		}
+		
+		api.fetch('DELETE', 'photo/' + photoIDs.join(), {}, function(data) {
+		// api.post('Photo::delete', params, function(data) {
 
-		api.post('Photo::delete', params, function(data) {
-
-			if (data!==true) lychee.error(null, params, data)
+			if (data!==true) lychee.error(null, params, data);
 
 		})
 
@@ -311,13 +312,13 @@ photo.setTitle = function(photoIDs) {
 		})
 
 		let params = {
-			photoIDs : photoIDs.join(),
 			title    : newTitle
-		}
+		};
 
-		api.post('Photo::setTitle', params, function(data) {
+		api.fetch('PATCH', 'photo/' + photoIDs.join(), params, function(data) {
+		// api.post('Photo::setTitle', params, function(data) {
 
-			if (data!==true) lychee.error(null, params, data)
+			if (data!==true) lychee.error(null, params, data);
 
 		})
 
@@ -378,11 +379,10 @@ photo.setAlbum = function(photoIDs, albumID) {
 	else if (!visible.albums())                                          lychee.goto(album.getID())
 
 	let params = {
-		photoIDs: photoIDs.join(),
 		albumID
 	}
 
-	api.post('Photo::setAlbum', params, function(data) {
+	api.fetch('PATCH', 'photo/' + photoIDs.join(), params, function(data) {
 
 		if (data!==true) lychee.error(null, params, data)
 
@@ -404,17 +404,17 @@ photo.setStar = function(photoIDs) {
 		view.album.content.star(id)
 	})
 
-	albums.refresh()
+	albums.refresh();
 
 	let params = {
-		photoIDs: photoIDs.join()
+		star: true
 	}
 
-	api.post('Photo::setStar', params, function(data) {
+	api.fetch('PATCH', 'photo/' + photoIDs.join(), params, function(data) {
 
-		if (data!==true) lychee.error(null, params, data)
+		if (data!==true) lychee.error(null, params, data);
 
-	})
+	});
 
 }
 
@@ -460,7 +460,7 @@ photo.setPublic = function(photoID, e) {
 
 	albums.refresh()
 
-	api.post('Photo::setPublic', { photoID }, function(data) {
+	api.fetch('PATCH', 'photo/' + photoID, {public: true}, function(data) {
 
 		if (data!==true) lychee.error(null, params, data)
 
@@ -484,11 +484,10 @@ photo.setDescription = function(photoID) {
 		}
 
 		let params = {
-			photoID,
 			description
 		}
 
-		api.post('Photo::setDescription', params, function(data) {
+		api.fetch('PATCH', 'photo/' + photoID, params, function(data) {
 
 			if (data!==true) lychee.error(null, params, data)
 
@@ -583,11 +582,10 @@ photo.setTags = function(photoIDs, tags) {
 	})
 
 	let params = {
-		photoIDs: photoIDs.join(),
 		tags
 	}
 
-	api.post('Photo::setTags', params, function(data) {
+	api.fetch('PATCH', 'photo/' + photoIDs.join(), params, function(data) {
 
 		if (data!==true) lychee.error(null, params, data)
 
