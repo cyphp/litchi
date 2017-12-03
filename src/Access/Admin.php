@@ -42,8 +42,8 @@ final class Admin extends Access {
 
 			// Add functions
 			// case 'Photo::add':              self::uploadAction(); break;
-			case 'Import::url':             self::importUrlAction(); break;
-			case 'Import::server':          self::importServerAction(); break;
+			// case 'Import::url':             self::importUrlAction(); break;
+			// case 'Import::server':          self::importServerAction(); break;
 
 			// Search functions
 			// case 'search':                  self::searchAction(); break;

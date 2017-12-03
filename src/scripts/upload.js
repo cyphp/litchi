@@ -264,11 +264,10 @@ upload.start = {
 					$('.basicModal .rows .row .status').html('Importing')
 
 					let params = {
-						url: data.link,
-						albumID
+						url: data.link
 					}
 
-					api.post('Import::url', params, function(data) {
+					api.fetch('POST', 'album/' + albumID + '/import', params, function(data) {
 
 						// Same code as in import.dropbox()
 
@@ -343,11 +342,10 @@ upload.start = {
 				$('.basicModal .rows .row .status').html('Importing')
 
 				let params = {
-					albumID,
 					path: data.path
 				}
 
-				api.post('Import::server', params, function(data) {
+				api.fetch('POST', 'album/' + albumID + '/import', params, function(data) {
 
 					albums.refresh()
 					upload.notify('Import complete')

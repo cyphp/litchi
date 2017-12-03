@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 use Lychee\Modules\Album as LycheeAlbum;
 use Lychee\Modules\Photo;
+use Lychee\Modules\Import;
 
 class Album
 {
@@ -58,6 +59,21 @@ class Album
         $album = new LycheeAlbum(null);
 
 		return $app->json($album->add($request->request->get('title')));
+    }
+
+    public function import(Request $request, Application $app, $id)
+    {
+        $import = new Import();
+
+        if ($url = $request->request->get('url')) {
+            return $app->json($import->url($url, $id));
+        }
+
+        if ($path = $request->request->get('path')) {
+            return $app->json($import->server($path, $id));
+        }
+
+		return $app->json(false);
     }
 
     public function change(Request $request, Application $app, $id)

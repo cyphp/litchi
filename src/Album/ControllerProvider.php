@@ -30,6 +30,9 @@ class ControllerProvider implements ControllerProviderInterface
         $controllers
             ->post('/', Http\Album::class . '::create')
             ->before(new Auth\Middleware\Auth());
+        $controllers
+            ->post('/{id}/import', Http\Album::class . '::import')
+            ->before(new Auth\Middleware\Auth());
 
         return $controllers;
     }
