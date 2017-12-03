@@ -158,7 +158,8 @@ album.delete = function(albumIDs) {
 			albumIDs: albumIDs.join()
 		}
 
-		api.post('Album::delete', params, function(data) {
+		api.fetch('DELETE', 'album/' + albumIDs.join(), {}, function(data) {
+		// api.post('Album::delete', params, function(data) {
 
 			if (visible.albums()) {
 
@@ -273,16 +274,16 @@ album.setTitle = function(albumIDs) {
 		}
 
 		let params = {
-			albumIDs : albumIDs.join(),
 			title    : newTitle
-		}
+		};
 
-		api.post('Album::setTitle', params, function(data) {
+		api.fetch('PATCH', 'album/' + albumIDs.join(), params, function(data) {
+		// api.post('Album::setTitle', params, function(data) {
 
-			if (data!==true) lychee.error(null, params, data)
-
-		})
-
+			if (data!==true) {
+				lychee.error(null, params, data);
+			}
+		});
 	}
 
 	let input = lychee.html`<input class='text' name='title' type='text' maxlength='50' placeholder='Title' value='$${ oldTitle }'>`
@@ -322,15 +323,15 @@ album.setDescription = function(albumID) {
 		}
 
 		let params = {
-			albumID,
 			description
 		}
 
-		api.post('Album::setDescription', params, function(data) {
+		api.fetch('PATCH', 'album/' + albumID, params, function(data) {
+		// api.post('Album::setDescription', params, function(data) {
 
-			if (data!==true) lychee.error(null, params, data)
+			if (data!==true) lychee.error(null, params, data);
 
-		})
+		});
 
 	}
 
@@ -490,16 +491,16 @@ album.setPublic = function(albumID, modal, e) {
 	}
 
 	let params = {
-		albumID,
 		public       : album.json.public,
 		password     : password,
 		visible      : album.json.visible,
 		downloadable : album.json.downloadable
 	}
 
-	api.post('Album::setPublic', params, function(data) {
+	api.fetch('PATCH', 'album/' + albumID, params, function(data) {
+	// api.post('Album::setPublic', params, function(data) {
 
-		if (data!==true) lychee.error(null, params, data)
+		if (data!==true) lychee.error(null, params, data);
 
 	})
 
@@ -569,11 +570,13 @@ album.merge = function(albumIDs) {
 
 		basicModal.close()
 
+		let destinationId = albumIDs[0];
 		let params = {
 			albumIDs: albumIDs.join()
 		}
 
-		api.post('Album::merge', params, function(data) {
+		api.fetch('POST', 'album/' + destinationId + '/merge', params, function(data) {
+		// api.post('Album::merge', params, function(data) {
 
 			if (data!==true) {
 				lychee.error(null, params, data)

@@ -59,4 +59,50 @@ class Album
 
 		return $app->json($album->add($request->request->get('title')));
     }
+
+    public function change(Request $request, Application $app, $id)
+    {
+        $album = new LycheeAlbum($id);
+
+        $changed = true;
+
+        if ($request->request->has('title')) {
+            $changed = $changed && $album->setTitle($request->request->get('title'));
+        }
+
+        if ($request->request->has('description')) {
+            $changed = $changed && $album->setDescription($request->request->get('description'));
+        }
+
+        if ($request->request->has('public') &&
+            $request->request->has('password') &&
+            $request->request->has('visible') &&
+            $request->request->has('downloadable')
+        ) {
+            $changed = $changed && $album->setDescription(
+                $album->setPublic(
+                    $request->request->get('public'),
+                    $request->request->get('password'),
+                    $request->request->get('visible'),
+                    $request->request->get('downloadable')
+                )
+            );
+        }
+
+		return $app->json($changed);
+    }
+
+    public function remove(Request $request, Application $app, $id)
+    {
+        $album = new LycheeAlbum($id);
+
+		return $app->json($album->delete());
+    }
+
+    public function merge(Request $request, Application $app, $id)
+    {
+        $album = new LycheeAlbum($request->request->get('albumIDs'));
+
+		return $app->json($album->merge());
+    }
 }

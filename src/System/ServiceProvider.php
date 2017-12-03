@@ -20,5 +20,6 @@ class ServiceProvider implements ServiceProviderInterface
 
         // Check if a configuration exists
         $app->before(new Middleware\Setup(), Application::EARLY_EVENT);
+        $app->before(new Middleware\JSONRequestBody());
     }
 }
