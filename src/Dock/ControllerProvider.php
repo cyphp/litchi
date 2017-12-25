@@ -13,7 +13,7 @@ class ControllerProvider implements ControllerProviderInterface
         $controllers = $app['controllers_factory'];
 
         $controllers->get('/', function (Application $app) {
-            return $app['twig']->render('litchi.html.twig', array());
+            return $app['twig']->render('litchi.html.twig', []);
         })->bind('homepage');
 
         return $controllers;

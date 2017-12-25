@@ -4,6 +4,7 @@ namespace Lychee\Auth;
 
 use Silex\Application;
 use Silex\Api\ControllerProviderInterface;
+use Symfony\Component\HttpFoundation\Request;
 
 class ControllerProvider implements ControllerProviderInterface
 {
@@ -15,7 +16,12 @@ class ControllerProvider implements ControllerProviderInterface
         $controllers->get('/', Http\Auth::class . '::status');
         $controllers->post('/', Http\Auth::class . '::login');
         $controllers->delete('/', Http\Auth::class . '::logout');
-        $controllers->patch('/', Http\Auth::class . '::change');
+        $controllers->patch('/', Http\Auth::class . '::change')
+            ->before(function(Request $request, Application $app) {
+                if (!$app['guard']->matchPassword($request->request->get('oldPassword'))) {
+                    return $app->json('Error: Current password entered incorrectly!');
+                }
+            });
 
         return $controllers;
     }

@@ -20,6 +20,15 @@ $app->register(new TwigServiceProvider());
 $app->register(new HttpFragmentServiceProvider());
 $app->register(new Silex\Provider\SessionServiceProvider());
 $app->register(new Silex\Provider\VarDumperServiceProvider());
+$app->register(new Silex\Provider\DoctrineServiceProvider(), [
+    'db.options' => [
+        'driver'   => 'pdo_mysql',
+        'host'      => getenv('DATABASE_HOST'),
+        'dbname'    => getenv('DATABASE_NAME'),
+        'user'      => getenv('DATABASE_USER'),
+        'password'  => getenv('DATABASE_PASSWORD'),
+    ],
+]);
 
 $app['twig'] = $app->extend('twig', function ($twig, $app) {
     // add custom globals, filters, tags, ...

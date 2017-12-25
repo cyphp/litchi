@@ -61,16 +61,13 @@ final class Config {
     * @return array Returns the config.
     */
 	public static function get() {
-        
-		require(LYCHEE_CONFIG_FILE);
-        
-		return(array(
-			'host'     => $dbHost,
-			'user'     => $dbUser,
-			'password' => $dbPassword,
-			'name'     => $dbName,
-			'prefix'   => $dbTablePrefix
-		));
+		return [
+			'host'     => getenv('DATABASE_HOST'),
+			'user'     => getenv('DATABASE_USER'),
+			'password' => getenv('DATABASE_PASSWORD'),
+			'name'     => getenv('DATABASE_NAME'),
+			'prefix'   => getenv('DATABASE_PREFIX')
+		];
         
 	}
     

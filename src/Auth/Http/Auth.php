@@ -11,57 +11,43 @@ class Auth
 {
     public function status(Request $request, Application $app)
     {
-        $settings = Settings::get();
-        $authCredentialsCorrupted = (!Settings::get()['username'] && !Settings::get()['password']);
         $return = [];
+        $settings = $app['pref']->toArray();
 
-        unset(
-            $settings['username'],
-            $settings['password'],
-            $settings['identifier']
-        );
+        $return['config'] = $settings;
+        $return['config']['login'] = !$app['guard']->credentialExists();
 
         if ($app['guard']->isAuthenticated()) {
             $return['status'] = LYCHEE_STATUS_LOGGEDIN;
-            $return['config'] = $settings;
-            $return['config']['login'] = !$authCredentialsCorrupted;
 
             return $app->json($return);
         }
 
         $return['status'] = LYCHEE_STATUS_LOGGEDOUT;
 
-        unset($settings['skipDuplicates']);
-        unset($settings['sortingAlbums']);
-        unset($settings['sortingPhotos']);
-        unset($settings['dropboxKey']);
-        unset($settings['login']);
-        unset($settings['location']);
-        unset($settings['imagick']);
-        unset($settings['plugins']);
-
-        $return['config'] = $settings;
-        $return['config']['login'] = !$authCredentialsCorrupted;
+        unset($return['config']['skipDuplicates']);
+        unset($return['config']['sortingAlbums']);
+        unset($return['config']['sortingPhotos']);
+        unset($return['config']['dropboxKey']);
+        unset($return['config']['login']);
+        unset($return['config']['location']);
+        unset($return['config']['imagick']);
+        unset($return['config']['plugins']);
 
         return $app->json($return);
     }
 
     public function login(Request $request, Application $app)
     {
-        $username_crypt = crypt($request->request->get('user'), Settings::get()['username']);
-		$password_crypt = crypt($request->request->get('password'), Settings::get()['password']);
-
 		// Check login with crypted hash
-		if (Settings::get()['username'] === $username_crypt &&
-            Settings::get()['password'] === $password_crypt
-        ) {
+		if ($app['guard']->matchCredential($request->request->get('user'), $request->request->get('password'))) {
             $app['session']->set('login', true);
-            $app['session']->set('identifier', Settings::get()['identifier']);
+            $app['session']->set('identifier', $app['guard']->getIdentifier());
             
             return $app->json(true);
         }
 
-		return $app->json(!Settings::get()['username'] && !Settings::get()['password']);
+		return $app->json($app['guard']->credentialExists());
     }
 
     public function logout(Request $request, Application $app)
@@ -73,15 +59,25 @@ class Auth
 
     public function change(Request $request, Application $app)
     {
-        $oldPassword = $request->request->get('oldPassword') ?: '';
-
-        return $app->json(
-            Settings::setLogin(
-                $oldPassword,
-                $request->request->get('username'),
-                $request->request->get('password')
-            )
+        $success = $app['guard']->saveCredential(
+            $request->request->get('username'),
+            $request->request->get('password')
         );
 
+        if ($success['username'] && $success['password']) {
+            return $app->json(true);
+        }
+
+        $error = '';
+
+        if (!$success['username']) {
+            $error .= 'Updating username failed! ';
+        }
+
+        if (!$success['password']) {
+            $error .= 'Updating password failed!';
+        }
+
+        return $app->json('Error: ' . $error);
     }
 }
